@@ -17,7 +17,8 @@ import java.util.List;
 public class SessionRepository {
     private static final Logger LOG = LogManager.getLogger(SessionRepository.class.getName());
     private static final String ADD = "INSERT INTO session(name) VALUES (?)";
-    private static final String FIND_ALL = "SELECT * FROM session";
+    private static final String FIND_ALL = "SELECT * FROM sessions";
+    private static final String FIND_BY_ID = "SELECT * FROM sessions WHERE id = ?";
     private BasicDataSource pool;
 
     public SessionRepository(BasicDataSource pool) {
@@ -58,6 +59,21 @@ public class SessionRepository {
         return sessions;
     }
 
+    public Session findById(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(FIND_BY_ID)
+        ) {
+            ps.setInt(1, id);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    return getSession(it);
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
+    }
     private Session getSession(ResultSet it) throws SQLException {
         return new Session(it.getInt("id"), it.getString("name"));
     }
