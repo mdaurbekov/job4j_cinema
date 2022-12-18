@@ -5,19 +5,19 @@ import java.util.Objects;
 public class Ticket {
     private int id;
     private Session session;
-    private int pos_row;
+    private int posRow;
     private int cell;
-    private int user_id;
+    private int userId;
 
     public Ticket() {
     }
 
-    public Ticket(int id, Session session, int pos_row, int cell, int user_id) {
+    public Ticket(int id, Session session, int posRow, int cell, int userId) {
         this.id = id;
         this.session = session;
-        this.pos_row = pos_row;
+        this.posRow = posRow;
         this.cell = cell;
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -36,12 +36,12 @@ public class Ticket {
         this.session = session;
     }
 
-    public int getPos_row() {
-        return pos_row;
+    public int getPosRow() {
+        return posRow;
     }
 
-    public void setPos_row(int pos_row) {
-        this.pos_row = pos_row;
+    public void setPosRow(int posRow) {
+        this.posRow = posRow;
     }
 
     public int getCell() {
@@ -52,12 +52,12 @@ public class Ticket {
         this.cell = cell;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override

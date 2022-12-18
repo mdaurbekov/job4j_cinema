@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public class TicketRepository {
     private static final Logger LOG = LogManager.getLogger(SessionRepository.class.getName());
-    private static final String ADD = "INSERT INTO ticket (session_id, pos_row, cell, user_id) VALUES (?, ?, ?, ?)";
+    private static final String ADD = "INSERT INTO ticket (session_id, posRow, cell, userId) VALUES (?, ?, ?, ?)";
     private BasicDataSource pool;
 
     public TicketRepository(BasicDataSource pool) {
@@ -28,9 +28,9 @@ public class TicketRepository {
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setInt(1, ticket.getSession().getId());
-            ps.setInt(2, ticket.getPos_row());
+            ps.setInt(2, ticket.getPosRow());
             ps.setInt(3, ticket.getCell());
-            ps.setInt(4, ticket.getUser_id());
+            ps.setInt(4, ticket.getUserId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
